@@ -31,6 +31,7 @@ public class CartService {
     private String productGet;
 
     public String addCart(String authHeader, Cart cart) {
+        System.out.println(jwtUtil.extractEmail(authHeader));
         if(cartRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),cart.getStoreName(),cart.getProductCode())){
             return "Product is Already in the Cart";
         }
@@ -44,7 +45,7 @@ public class CartService {
         List<CartResponse> response= new ArrayList<>();
         for(Cart cart: carts){
             try{
-                Product product = restTemplate.getForObject(productGet+"?productId="+cart.getProductId(), Product.class);
+                Product product = restTemplate.getForObject(productGet+cart.getProductId(), Product.class);
                 if(product!=null){
                     CartResponse merge = new CartResponse(
                         cart.getCartId(),
@@ -65,6 +66,9 @@ public class CartService {
     }
 
     public boolean isCart(String authHeader, String storeName, String productCode) {
+        System.out.println(productCode);
+        System.out.println(storeName);
+        System.out.println(jwtUtil.extractEmail(authHeader));
         return cartRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),storeName,productCode);
     }
 

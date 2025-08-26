@@ -45,7 +45,7 @@ public class FavouriteService {
         List<FavouriteResponse> response = new ArrayList<>();
         for(Favourite favourite :favourites){
             try{
-                Product product = restTemplate.getForObject(productGet+"?productId="+favourite.getProductId(), Product.class);
+                Product product = restTemplate.getForObject(productGet+favourite.getProductId(), Product.class);
                 if(product!=null){
                     FavouriteResponse merge = new FavouriteResponse(
                         favourite.getFavouriteId(),
@@ -74,6 +74,6 @@ public class FavouriteService {
             favouriteRepository.deleteById(favouriteId);
             return "Favourite Removed Successfully";
         }
-        return "Failed to Remove Favouurite Item.";
+        return "Failed to Remove Favourite Item.";
     }
 }
