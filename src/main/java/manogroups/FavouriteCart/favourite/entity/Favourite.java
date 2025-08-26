@@ -22,6 +22,7 @@ public class Favourite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long favouriteId;
 
+    private String productCode;
     private Long productId;
     private String userEmail;
     private String storeName;

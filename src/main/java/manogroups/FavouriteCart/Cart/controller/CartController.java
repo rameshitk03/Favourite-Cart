@@ -46,8 +46,8 @@ public class CartController {
     }
 
     @GetMapping("/cart/{storeName}")
-    public ResponseEntity<Boolean> isCart(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName, @RequestParam Long productId){
-        boolean cart = cartService.isCart(authHeader.substring(7),storeName,productId);
+    public ResponseEntity<Boolean> isCart(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName, @RequestParam String productCode){
+        boolean cart = cartService.isCart(authHeader.substring(7),storeName,productCode);
         return ResponseEntity.ok(cart);
     }
 

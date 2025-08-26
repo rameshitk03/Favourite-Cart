@@ -32,7 +32,7 @@ public class FavouriteService {
 
     public String addFavourite(String authHeader, Favourite favourite) {
         String userEmail = jwtUtil.extractEmail(authHeader);
-        if(favouriteRepository.existsByUserEmailAndStoreNameAndProductId(userEmail,favourite.getStoreName(),favourite.getProductId())){
+        if(favouriteRepository.existsByUserEmailAndStoreNameAndProductCode(userEmail,favourite.getStoreName(),favourite.getProductCode())){
              return "Product is Already in Favourite";
         }
         favourite.setUserEmail(userEmail);
@@ -64,8 +64,8 @@ public class FavouriteService {
         return response;
     }
 
-    public boolean isFavourite(String authHeader, String storeName, Long productCode) {
-       return favouriteRepository.existsByUserEmailAndStoreNameAndProductId(jwtUtil.extractEmail(authHeader),storeName,productCode);
+    public boolean isFavourite(String authHeader, String storeName, String productCode) {
+       return favouriteRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),storeName,productCode);
     }
 
     public String deleteFavourite(String authHeader,Long favouriteId) {

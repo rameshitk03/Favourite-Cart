@@ -10,6 +10,6 @@ import manogroups.FavouriteCart.Cart.entity.Cart;
 @Repository
 public interface CartRepository extends JpaRepository <Cart,Long>{
     List<Cart> findByUserEmailAndStoreName(String email, String storeName);
-    boolean existsByStoreNameAndProductId(String storeName, Long productId);
-    boolean existsByUserEmailAndStoreNameAndProductId(String email, String storeName, Long productId);
+    boolean existsByStoreNameAndProductCode(String storeName, String productCode);
+    boolean existsByUserEmailAndStoreNameAndProductCode(String email, String storeName, String productCode);
 }

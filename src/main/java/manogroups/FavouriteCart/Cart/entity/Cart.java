@@ -23,6 +23,7 @@ public class Cart {
     private Long cartId;
 
     private Long productId;
+    private String productCode;
     private String storeName;
     private String userEmail;
     private int    noOfQuantity;

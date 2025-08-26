@@ -46,8 +46,8 @@ public class FavouriteController {
     }
 
     @GetMapping("/favourite/{storeName}")
-    public ResponseEntity<Boolean> isFavourite(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName,@RequestParam Long productId){
-        boolean favourite = favouriteService.isFavourite(authHeader.substring(7),storeName,productId);
+    public ResponseEntity<Boolean> isFavourite(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName,@RequestParam String productCode){
+        boolean favourite = favouriteService.isFavourite(authHeader.substring(7),storeName,productCode);
         return ResponseEntity.ok(favourite);
     }
 

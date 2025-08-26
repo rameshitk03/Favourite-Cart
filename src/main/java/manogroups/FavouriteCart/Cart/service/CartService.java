@@ -31,7 +31,7 @@ public class CartService {
     private String productGet;
 
     public String addCart(String authHeader, Cart cart) {
-        if(cartRepository.existsByStoreNameAndProductId(cart.getStoreName(),cart.getProductId())){
+        if(cartRepository.existsByStoreNameAndProductCode(cart.getStoreName(),cart.getProductCode())){
             return "Product is Already in the Cart";
         }
         cart.setUserEmail(jwtUtil.extractEmail(authHeader));
@@ -64,8 +64,8 @@ public class CartService {
         return response;
     }
 
-    public boolean isCart(String authHeader, String storeName, Long productId) {
-        return cartRepository.existsByUserEmailAndStoreNameAndProductId(jwtUtil.extractEmail(authHeader),storeName,productId);
+    public boolean isCart(String authHeader, String storeName, String productCode) {
+        return cartRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),storeName,productCode);
     }
 
     public String updateCart(String authHeader,Long cartId, int noOfQuantity){
