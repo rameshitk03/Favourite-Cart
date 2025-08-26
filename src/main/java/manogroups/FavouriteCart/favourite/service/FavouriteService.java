@@ -41,7 +41,7 @@ public class FavouriteService {
     }
 
     public List<FavouriteResponse> getFavourites(String authHeader, String storeName) {
-        List<Favourite> favourites =  favouriteRepository.findByUserEmailAndStoreName(jwtUtil.extractEmail(authHeader),storeName);
+        List<Favourite> favourites =  favouriteRepository.findByUserEmailAndStoreNameOrderByFavouriteIdAsc(jwtUtil.extractEmail(authHeader),storeName);
         List<FavouriteResponse> response = new ArrayList<>();
         for(Favourite favourite :favourites){
             try{

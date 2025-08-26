@@ -41,7 +41,7 @@ public class CartService {
     }
 
     public List<CartResponse> getCarts(String authHeader, String storeName) {
-        List<Cart> carts = cartRepository.findByUserEmailAndStoreName(jwtUtil.extractEmail(authHeader),storeName);
+        List<Cart> carts = cartRepository.findByUserEmailAndStoreNameOrderByCartIdAsc(jwtUtil.extractEmail(authHeader),storeName);
         List<CartResponse> response= new ArrayList<>();
         for(Cart cart: carts){
             try{

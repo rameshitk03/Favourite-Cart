@@ -9,6 +9,6 @@ import manogroups.FavouriteCart.favourite.entity.Favourite;
 
 @Repository
 public interface FavouriteRepository extends JpaRepository<Favourite, Long>{
-    List<Favourite> findByUserEmailAndStoreName(String email, String storeName);
+    List<Favourite> findByUserEmailAndStoreNameOrderByFavouriteIdAsc(String email, String storeName);
     boolean existsByUserEmailAndStoreNameAndProductCode(String userEmail, String storeName, String productCode);
 }
