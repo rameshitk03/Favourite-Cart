@@ -31,7 +31,7 @@ public class CartService {
     private String productGet;
 
     public String addCart(String authHeader, Cart cart) {
-        if(cartRepository.existsByStoreNameAndProductCode(cart.getStoreName(),cart.getProductCode())){
+        if(cartRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),cart.getStoreName(),cart.getProductCode())){
             return "Product is Already in the Cart";
         }
         cart.setUserEmail(jwtUtil.extractEmail(authHeader));
