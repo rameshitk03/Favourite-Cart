@@ -11,4 +11,5 @@ import manogroups.FavouriteCart.favourite.entity.Favourite;
 public interface FavouriteRepository extends JpaRepository<Favourite, Long>{
     List<Favourite> findByUserEmailAndStoreNameOrderByFavouriteIdAsc(String email, String storeName);
     boolean existsByUserEmailAndStoreNameAndProductCode(String userEmail, String storeName, String productCode);
+    void deleteByUserEmailAndStoreNameAndProductCode(String userEmail, String storeName, String productCode);
 }

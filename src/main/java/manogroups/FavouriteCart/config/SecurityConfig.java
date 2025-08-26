@@ -29,11 +29,11 @@ public class SecurityConfig {
                     "/api/cart/cart/{storeName}",
                     "/api/cart/carts/{storeName}",
                     "/api/cart/update/{cartId}",
-                    "/api/cart/delete/{cartId}",
+                    "/api/cart/delete/{storeName}",
                     "/api/favourite/add",
                     "/api/favourite/favourite/{storeName}",
                     "/api/favourite/favourites/{storeName}",
-                    "/api/favourite/delete/{favouriteId}"
+                    "/api/favourite/delete/{storeName}"
         ).hasAnyRole("ADMIN","STAFF","USER")
         .anyRequest().authenticated())
         .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler))

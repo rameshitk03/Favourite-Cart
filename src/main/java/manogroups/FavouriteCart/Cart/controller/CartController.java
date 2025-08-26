@@ -40,7 +40,7 @@ public class CartController {
     public ResponseEntity<?> getCarts(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName){
         List<CartResponse> carts = cartService.getCarts(authHeader.substring(7),storeName);
         if(carts.isEmpty()){
-            return ResponseEntity.badRequest().body("No Products in Your Cart. Please Add a Product in your Cart");
+            return ResponseEntity.ok("No Products in Your Cart. Please Add a Product in your Cart");
         }
         return ResponseEntity.ok(carts);
     }
@@ -61,10 +61,10 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/delete/{cartId}")
-    public ResponseEntity<String> deleteCart(@RequestHeader("Authorization") String authHeader,@PathVariable Long cartId){
+    @DeleteMapping("/delete/{storeName}")
+    public ResponseEntity<String> deleteCart(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName,@RequestParam String productCode){
         try{
-            String message = cartService.deleteCart(authHeader.substring(7),cartId);
+            String message = cartService.deleteCart(authHeader.substring(7),storeName,productCode);
             return ResponseEntity.ok(message);
         }catch(RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());

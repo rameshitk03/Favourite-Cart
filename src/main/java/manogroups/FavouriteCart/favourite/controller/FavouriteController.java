@@ -40,7 +40,7 @@ public class FavouriteController {
     public ResponseEntity<?> getFavourites(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName){
         List<FavouriteResponse> favourites = favouriteService.getFavourites(authHeader.substring(7),storeName);
         if(favourites.isEmpty()){
-            return ResponseEntity.badRequest().body("No Product Available in Your Favourite. Please Add a Product in your Favourite");
+            return ResponseEntity.ok("No Product Available in Your Favourite. Please Add a Product in your Favourite");
         }
         return ResponseEntity.ok(favourites);
     }
@@ -51,10 +51,10 @@ public class FavouriteController {
         return ResponseEntity.ok(favourite);
     }
 
-    @DeleteMapping("delete/{favouriteId}")
-    public ResponseEntity<String> deleteFavourite(@RequestHeader("Authorization") String authHeader,@PathVariable Long favouriteId){
+    @DeleteMapping("delete/{storeName}")
+    public ResponseEntity<String> deleteFavourite(@RequestHeader("Authorization") String authHeader,@PathVariable String storeName, @RequestParam String productCode){
         try{
-            String message = favouriteService.deleteFavourite(authHeader.substring(7), favouriteId);
+            String message = favouriteService.deleteFavourite(authHeader.substring(7), storeName,productCode);
             return ResponseEntity.ok(message);
         }catch(RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());

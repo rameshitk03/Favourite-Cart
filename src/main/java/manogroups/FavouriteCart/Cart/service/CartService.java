@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -84,13 +85,17 @@ public class CartService {
         return "Failed to Update Cart";
     }
 
-    public String deleteCart(String authHeader,Long cartId) {
-        Cart cart = cartRepository.findById(cartId).orElse(null);
-        if(cart !=null && jwtUtil.extractEmail(authHeader).equals(cart.getUserEmail()) ){
-            cartRepository.deleteById(cartId);
-            return "Cart item Removed Successfully.";
+    @Transactional
+    public String deleteCart(String authHeader,String storeName, String productCode) {
+        String userEmail = jwtUtil.extractEmail(authHeader);
+        System.out.println(userEmail);
+        System.out.println(storeName);
+        System.out.println(productCode);
+        if(cartRepository.existsByUserEmailAndStoreNameAndProductCode(userEmail, storeName, productCode)){
+            cartRepository.deleteByUserEmailAndStoreNameAndProductCode(userEmail,storeName,productCode);
+            return "Cart Item was Removed";
         }
-        return "Failed to Remove Cart Item.";
+        return "Cart Not Found";
     }
 
 }

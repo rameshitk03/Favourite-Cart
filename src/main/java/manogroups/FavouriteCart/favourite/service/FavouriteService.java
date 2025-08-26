@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import jakarta.transaction.Transactional;
 import manogroups.FavouriteCart.DTO.Product;
 import manogroups.FavouriteCart.Jwt.JwtUtil;
 import manogroups.FavouriteCart.favourite.DTO.FavouriteResponse;
@@ -68,12 +69,16 @@ public class FavouriteService {
        return favouriteRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),storeName,productCode);
     }
 
-    public String deleteFavourite(String authHeader,Long favouriteId) {
-        Favourite favourite = favouriteRepository.findById(favouriteId).orElse(null);
-        if(favourite !=null && jwtUtil.extractEmail(authHeader).equals(favourite.getUserEmail())){
-            favouriteRepository.deleteById(favouriteId);
-            return "Favourite Removed Successfully";
+    @Transactional
+    public String deleteFavourite(String authHeader,String storeName, String productCode) {
+        String userEmail = jwtUtil.extractEmail(authHeader);
+        System.out.println(userEmail);
+        System.out.println(storeName);
+        System.out.println(productCode);
+        if(favouriteRepository.existsByUserEmailAndStoreNameAndProductCode(userEmail, storeName, productCode)){
+            favouriteRepository.deleteByUserEmailAndStoreNameAndProductCode(userEmail,storeName,productCode);
+            return "Favourite Item was removed";
         }
-        return "Failed to Remove Favourite Item.";
+        return  "Favourite Item not Found";
     }
 }
