@@ -67,9 +67,6 @@ public class CartService {
     }
 
     public boolean isCart(String authHeader, String storeName, String productCode) {
-        System.out.println(productCode);
-        System.out.println(storeName);
-        System.out.println(jwtUtil.extractEmail(authHeader));
         return cartRepository.existsByUserEmailAndStoreNameAndProductCode(jwtUtil.extractEmail(authHeader),storeName,productCode);
     }
 
@@ -88,9 +85,6 @@ public class CartService {
     @Transactional
     public String deleteCart(String authHeader,String storeName, String productCode) {
         String userEmail = jwtUtil.extractEmail(authHeader);
-        System.out.println(userEmail);
-        System.out.println(storeName);
-        System.out.println(productCode);
         if(cartRepository.existsByUserEmailAndStoreNameAndProductCode(userEmail, storeName, productCode)){
             cartRepository.deleteByUserEmailAndStoreNameAndProductCode(userEmail,storeName,productCode);
             return "Cart Item was Removed";
