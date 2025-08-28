@@ -14,7 +14,8 @@ public class CartResponse {
     private Long cartId;
     private String productCode;
     private int quantity;
-    
+
+    private String staffName;
     private Long productId;
     private String productName;
     private Double productPrice;
