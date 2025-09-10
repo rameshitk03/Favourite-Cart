@@ -14,6 +14,7 @@ public class Product {
     private Long productId;
     private String productCode;
     private String productName;
+    private int productQuantity;
     private Double productSellingPrice;
     private List<String> productImageId;
 }
