@@ -52,7 +52,6 @@ public class FavouriteService {
                         favourite.getFavouriteId(),
                         product.getProductCode(),
                         favourite.getProductId(),
-                        product.getProductQuantity(),
                         product.getProductName(),
                         product.getProductSellingPrice(),
                         product.getProductImageId()

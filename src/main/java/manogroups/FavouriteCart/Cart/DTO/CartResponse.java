@@ -18,6 +18,7 @@ public class CartResponse {
     private String staffName;
     private Long productId;
     private String productName;
+    private int productQuantity;
     private Double productPrice;
     private List<String> productImageId;
 }

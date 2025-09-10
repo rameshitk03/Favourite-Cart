@@ -55,6 +55,7 @@ public class CartService {
                         cart.getStaffName(),
                         cart.getProductId(),
                         product.getProductName(),
+                        product.getProductQuantity(),
                         product.getProductSellingPrice(),
                         product.getProductImageId()
                     );

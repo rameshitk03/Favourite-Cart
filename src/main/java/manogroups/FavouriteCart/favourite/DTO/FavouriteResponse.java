@@ -15,7 +15,6 @@ public class FavouriteResponse {
     private String productCode;
     
     private Long productId;
-    private int productQuantity;
     private String productName;
     private Double productPrice;
     private List<String> productImageId;
